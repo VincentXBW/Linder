@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linder</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.phone{
+    width:360px;
+    background:white;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.header{
+    padding:16px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#ff5a5f;
+}
+
+.card{
+    position:relative;
+    height:520px;
+    background-size:cover;
+    background-position:center;
+}
+
+.overlay{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    color:white;
+    padding:20px;
+    background:linear-gradient(transparent, rgba(0,0,0,.85));
+}
+
+.buttons{
+    display:flex;
+    justify-content:space-evenly;
+    padding:20px;
+}
+
+button{
+    width:70px;
+    height:70px;
+    border:none;
+    border-radius:50%;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.nope{
+    background:white;
+    border:2px solid #ff5a5f;
+    color:#ff5a5f;
+}
+
+.like{
+    background:#ff5a5f;
+    color:white;
+}
+
+.match{
+    display:none;
+    text-align:center;
+    padding:15px;
+    background:#ffe8ea;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+    <div class="header">Linder</div>
+
+    <div class="match" id="matchBox">
+        🎉 It's a Match!
+    </div>
+
+    <div class="card" id="card">
+        <div class="overlay">
+            <h2 id="name"></h2>
+            <p id="bio"></p>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="nope" onclick="nextProfile()">✕</button>
+        <button class="like" onclick="likeProfile()">♥</button>
+    </div>
+
+</div>
+
+<script>
+const profiles = [
+{
+    name: "Leo, 14",
+    bio: "Bike enthusiast who loves mountain trails. Born in China.",
+    image: "Media.jpg"
+},
+{
+    name: "Leo, 14",
+    bio: "Professional Coder and Granny Remake Remake Dev, Shepparton 15km Away",
+    image: "Media2.jpg"
+},
+{
+    name: "Leo, 14",
+    bio: "Proffesional Scooter Rider, Lives In Shepparton. Born in China.",
+    image: "Media3.jpg"
+},
+];
+
+let current = 0;
+
+function renderProfile() {
+    const p = profiles[current];
+    document.getElementById("name").textContent = p.name;
+    document.getElementById("bio").textContent = p.bio;
+    document.getElementById("card").style.backgroundImage =
+        `url('${p.image}')`;
+}
+
+function nextProfile() {
+    document.getElementById("matchBox").style.display = "none";
+    current = (current + 1) % profiles.length;
+    renderProfile();
+}
+
+function likeProfile() {
+    document.getElementById("matchBox").style.display = "block";
+    setTimeout(nextProfile, 1200);
+}
+
+renderProfile();
+</script>
+
+</body>
+</html>
